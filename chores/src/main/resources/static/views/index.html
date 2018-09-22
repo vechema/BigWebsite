@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Main Page</title>
+</head>
+<body ng-app="chores">
+<hr/>
+<div class="container" ng-controller="UserController">
+    <div class="row">
+        <label>User</label> <input type="text" ng-model="userDto.name" class="input-sm spacing"/>
+        <label>Chores</label> <input type="text" ng-model="chores" ng-list class="input-sm custom-width spacing"
+                                     placeholder="use comma to separate chores"/>
+        <button ng-click="saveUser()" class="btn btn-sm btn-info">Save User</button>
+    </div>
+    <hr/>
+    <div class="row">
+        <p>{{allUsers | json}}</p>
+    </div>
+    <hr/>
+    <div class="row" ng-repeat="user in allUsers">
+        <div class="">
+            <h3>{{user.name}}</h3>
+            <span ng-repeat="chore in user.choreDtos" class="spacing">{{chore.name}}</span>
+        </div>
+    </div>
+</div>
+</body>
+<script src="js/lib/angular.min.js"></script>
+<script src="js/lib/ui-bootstrap-tpls-2.5.0.min.js"></script>
+<script src="js/app/app.js"></script>
+<script src="js/app/UserController.js"></script>
+<script src="js/app/UserService.js"></script>
+<link rel="stylesheet" href="css/lib/bootstrap.min.css"/>
+<link rel="stylesheet" href="css/app/app.css"/>
+</html>
