@@ -10,4 +10,6 @@ public interface UserService {
     void saveUser(UserDto userDto);
 
     List<UserDto> getAllUsers();
+
+    void deleteUser(Integer userId);
 }

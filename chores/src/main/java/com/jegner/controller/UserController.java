@@ -31,4 +31,9 @@ public class UserController {
     public void saveUser(@RequestBody UserDto userDto) {
         userService.saveUser(userDto);
     }
+
+    @RequestMapping(value="{userId}", method = RequestMethod.DELETE)
+    public void deleteUser(@PathVariable Integer userId) {
+        userService.deleteUser(userId);
+    }
 }

@@ -24,7 +24,6 @@ module.controller("UserController", [ "$scope", "UserService",
 					return {id: null, name: chore};
 				});
 				UserService.saveUser($scope.userDto).then(function() {
-					console.log("works");
 					UserService.getAllUsers().then(function(value) {
 						$scope.allUsers= value.data;
 					}, function(reason) {
@@ -40,9 +39,32 @@ module.controller("UserController", [ "$scope", "UserService",
 						choreDtos : []
 					};
 				}, function(reason) {
-					console.log("error occured");
+					console.log("error occurred");
 				}, function(value) {
 					console.log("no callback");
 				});
+			}
+
+			$scope.deleteUser = function(deleteId) {
+                UserService.deleteUser(deleteId).then(function() {
+                    UserService.getAllUsers().then(function(value) {
+                        $scope.allUsers= value.data;
+                    }, function(reason) {
+                        console.log("error occurred");
+                    }, function(value) {
+                        console.log("no callback");
+                    });
+
+                    $scope.chores = [];
+                    $scope.userDto = {
+                        id : null,
+                        name : null,
+                        choreDtos : []
+                    };
+                }, function(reason) {
+                    console.log("error occurred");
+                }, function(value) {
+                    console.log("no callback");
+                });
 			}
 		} ]);

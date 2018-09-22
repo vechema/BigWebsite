@@ -13,5 +13,9 @@ angular.module('user.service', []).factory('UserService',
 			service.saveUser = function(userDto) {
 				return $http.post(CONSTANTS.userResource, userDto);
 			}
+			service.deleteUser = function(deleteId) {
+				var url = CONSTANTS.userResource + deleteId
+				return $http.delete(url);
+			}
 			return service;
 		} ]);

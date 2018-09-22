@@ -30,4 +30,9 @@ public class UserServiceimpl implements UserService {
 	public List<UserDto> getAllUsers() {
 		return userRepository.findAll().stream().map(UserConverter::entityToDto).collect(Collectors.toList());
 	}
+
+    @Override
+    public void deleteUser(Integer userId) {
+        userRepository.delete(userId);
+    }
 }
