@@ -1,7 +1,7 @@
 'use strict'
 
-var demoApp = angular.module('chores', [ 'ui.bootstrap', 'user.controller',
+var choresApp = angular.module('chores', [ 'ui.bootstrap', 'user.controller',
         'user.service' ]);
-demoApp.constant("CONSTANTS", {
+choresApp.constant("CONSTANTS", {
     userResource : "/user/",
 });
