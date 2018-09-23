@@ -1,7 +1,9 @@
 package com.jegner.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.jegner.converter.UserConverter;
 import com.jegner.dto.UserDto;
 import com.jegner.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,21 +21,26 @@ public class UserController {
 
     @RequestMapping("{userId}")
     public UserDto getUserById(@PathVariable Integer userId) {
-        return userService.getUserById(userId);
+        return UserConverter.entityToDto(userService.getUserById(userId));
     }
 
     @RequestMapping()
     public List<UserDto> getAllUsers() {
-        return userService.getAllUsers();
+        return userService.getAllUsers().stream().map(UserConverter::entityToDto).collect(Collectors.toList());
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public void saveUser(@RequestBody UserDto userDto) {
-        userService.saveUser(userDto);
+        userService.saveUser(UserConverter.dtoToEntity(userDto));
     }
 
     @RequestMapping(value="{userId}", method = RequestMethod.DELETE)
     public void deleteUser(@PathVariable Integer userId) {
         userService.deleteUser(userId);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public void updateUser(@RequestBody UserDto userDto) {
+        userService.updateUser(UserConverter.dtoToEntity(userDto));
     }
 }

@@ -2,6 +2,7 @@ package com.jegner.service.impl;
 
 import com.jegner.converter.UserConverter;
 import com.jegner.dto.UserDto;
+import com.jegner.entity.User;
 import com.jegner.repository.UserRepository;
 import com.jegner.service.UserService;
 
@@ -17,22 +18,27 @@ public class UserServiceimpl implements UserService {
     UserRepository userRepository;
 
     @Override
-    public UserDto getUserById(Integer userId) {
-        return UserConverter.entityToDto(userRepository.getOne(userId));
+    public User getUserById(Integer userId) {
+        return userRepository.getOne(userId);
     }
 
     @Override
-    public void saveUser(UserDto userDto) {
-        userRepository.save(UserConverter.dtoToEntity(userDto));
+    public void saveUser(User user) {
+        userRepository.save(user);
     }
 
     @Override
-    public List<UserDto> getAllUsers() {
-        return userRepository.findAll().stream().map(UserConverter::entityToDto).collect(Collectors.toList());
+    public List<User> getAllUsers() {
+        return userRepository.findAll().stream().collect(Collectors.toList());
     }
 
     @Override
     public void deleteUser(Integer userId) {
         userRepository.delete(userId);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        userRepository.save(user);
     }
 }

@@ -2,14 +2,16 @@ package com.jegner.service;
 
 import java.util.List;
 
-import com.jegner.dto.UserDto;
+import com.jegner.entity.User;
 
 public interface UserService {
-    UserDto getUserById(Integer userId);
+    User getUserById(Integer userId);
 
-    void saveUser(UserDto userDto);
+    void saveUser(User user);
 
-    List<UserDto> getAllUsers();
+    List<User> getAllUsers();
 
     void deleteUser(Integer userId);
+
+    void updateUser(User user);
 }
